@@ -66,6 +66,13 @@ public class ControladorLogin {
 	public ModelAndView irAHome() {
 		return new ModelAndView("home");
 	}
+	@RequestMapping(path = "/registrarse", method = RequestMethod.GET)
+	public ModelAndView irARegistrarse() {
+		ModelMap modelo = new ModelMap();
+		Usuario usuario = new Usuario();
+		modelo.put("usuario", usuario);
+		return new ModelAndView("registrarse",modelo);
+	}
 
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)

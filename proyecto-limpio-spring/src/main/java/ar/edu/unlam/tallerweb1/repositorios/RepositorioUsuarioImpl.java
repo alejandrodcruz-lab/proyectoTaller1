@@ -31,7 +31,10 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		// de busqueda de Usuario donde el email y password sean iguales a los del objeto recibido como parametro
 		// uniqueResult da error si se encuentran más de un resultado en la busqueda.
 		final Session session = sessionFactory.getCurrentSession();
-		return (Usuario) session.createCriteria(Usuario.class)
+		return (Usuario) session.createCriteria(Usuario.class)				
+				.add(Restrictions.eq("nombre", usuario.getNombre()))
+				.add(Restrictions.eq("apellido", usuario.getApellido()))
+				.add(Restrictions.eq("nombreUsuario", usuario.getNombreUsuario()))
 				.add(Restrictions.eq("email", usuario.getEmail()))
 				.add(Restrictions.eq("password", usuario.getPassword()))
 				.uniqueResult();

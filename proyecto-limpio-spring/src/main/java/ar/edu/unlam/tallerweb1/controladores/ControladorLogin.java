@@ -30,7 +30,6 @@ public class ControladorLogin {
 	// Este metodo escucha la URL localhost:8080/NOMBRE_APP/login si la misma es invocada por metodo http GET
 	@RequestMapping("/entrar")
 	public ModelAndView irALogin() {
-
 		ModelMap modelo = new ModelMap();
 		// Se agrega al modelo un objeto del tipo Usuario con key 'usuario' para que el mismo sea asociado
 		// al model attribute del form que esta definido en la vista 'login'
@@ -47,7 +46,6 @@ public class ControladorLogin {
 	@RequestMapping(path = "/validar-login", method = RequestMethod.POST)
 	public ModelAndView validarLogin(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
-
 		// invoca el metodo consultarUsuario del servicio y hace un redirect a la URL /home, esto es, en lugar de enviar a una vista
 		// hace una llamada a otro action a través de la URL correspondiente a ésta
 		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
@@ -78,5 +76,17 @@ public class ControladorLogin {
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
 		return new ModelAndView("redirect:/home");
+	}
+	
+	@RequestMapping(path = "/validar-registro", method = RequestMethod.POST)
+	public ModelAndView validarRegistro(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
+		ModelMap model = new ModelMap();
+		Boolean guardado = servicioLogin.guardarUsuario(usuario);
+		if (guardado == true) {
+			return new ModelAndView("redirect:/home");
+		} else {
+			model.put("error", "Usuario o campo vacio");
+			return new ModelAndView("registrarse", model);
+		}
 	}
 }

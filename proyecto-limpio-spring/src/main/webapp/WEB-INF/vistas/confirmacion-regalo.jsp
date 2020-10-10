@@ -12,29 +12,23 @@
 	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
  
 </head> 
-<header>
 <%@ include file="./layout/Header.jsp"%> 
-</header> 
-
 <body>  
 <div class="alert alert-info container" role="alert">
-
-<div style="margin-top:30px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-<h3> Tu regalo se ha realizado con exito! Por favor, revisa los detalles</h3>  
- <h3>	Nombre: ${regalo.nombre} <br>  
-	Descripcion: ${regalo.descripcion} <br>  
-	Precio: ${regalo.precio}<br>  
-	Tipo de Regalo:	
-	<ul>  
-	<c:forEach var="regalo" items="${regalo.categoria}"> 
-	 
-	<li>${regalo}</li>  
-	</c:forEach>  </h3>
-	
-	</ul>  
+	<div style="margin-top:30px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		<h3> Tu regalo se ha realizado con exito! Por favor, revisa los detalles</h3>  
+ 		<h3>
+ 			Nombre: ${regalo.nombre} 			<br>  
+			Descripcion: ${regalo.descripcion}	<br>  
+			Precio: ${regalo.precio}			<br>  
+			Tipo de Regalo:	
+			<ul>  
+				<c:forEach var="regalo" items="${regalo.categoria}"> 
+				<li>${regalo}</li>  
+				</c:forEach>
+			</ul> 
+		</h3>			 
 	</div>
-	</div>
-	
-
+</div>	
 </body>  
 </html> 

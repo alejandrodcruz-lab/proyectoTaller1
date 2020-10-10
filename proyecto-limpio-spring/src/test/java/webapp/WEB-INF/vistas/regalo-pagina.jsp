@@ -20,30 +20,31 @@
 <div class = "container h3">
 <div id="loginbox" style="margin-top:30px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 <h4>Completa los datos para realizar tu regalo</h4>  
-    <form:form action="submitForm" modelAttribute="regalo">  
+
+    <form:form action="submitForm" modelAttribute="regalo" method="GET">  
     
         Nombre: <form:input class="form-control" path="nombre" />      
        
-        Numero de Caja: <form:input class="form-control" path="numeroDeCaja" />  
+<%--         Numero de Cajas: <form:input class="form-control" path="numeroDeCaja" />   --%>
          
         Descripcion: <form:input class="form-control" path="descripcion"/>  
         <br><br>  
         Precio que deseas gastar: <form:input path="precio"/>
         <br><br>
-        Escoge tu regalo:
-        <br><br>
-        <div class="form-check form-check-inline">
-        Restaurante<form:checkbox  path="categoria" value="Restaurante"/> 
-        </div>
-        <div class="form-check form-check-inline"> 
-        Spa <form:checkbox  path="categoria" value="Spa"/> 
-        </div>
-        <div class="form-check form-check-inline"> 
-        Cursos<form:checkbox  path="categoria" value="Cursos"/>  
+<!--         Escogé tu regalo: -->
+<!--         <br><br> -->
+<!--         <div class="form-check form-check-inline"> -->
+<%--         Restaurante<form:checkbox  path="categoria" value="Restaurante"/>  --%>
+<!--         </div> -->
+<!--         <div class="form-check form-check-inline">  -->
+<%--         Spa <form:checkbox  path="categoria" value="Spa"/>  --%>
+<!--         </div> -->
+<!--         <div class="form-check form-check-inline">  -->
+<%--         Cursos<form:checkbox  path="categoria" value="Cursos"/>   --%>
     <br><br>
         <hr class="colorgraph"><br>
         </div>
-        <input class="btn btn-lg btn-primary btn-block"  type="submit" value="Submit" /> 
+        <input class="btn btn-lg btn-primary btn-block"  type="submit" value="Comprar" /> 
         
     </form:form>
     </div>

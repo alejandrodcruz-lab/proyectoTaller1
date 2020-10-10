@@ -4,7 +4,7 @@
 <!DOCTYPE html>  
 <html>  
 <head>  
-    <title>Regalo Form</title> 
+    <title>Regalo Comprado</title> 
     <!-- Bootstrap core CSS -->
 	    <link href="../css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
@@ -22,9 +22,9 @@
 <div style="margin-top:30px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 <h3> Tu regalo se ha realizado con exito! Por favor, revisa los detalles</h3>  
  <h3>	Nombre: ${regalo.nombre} <br>  
-	Descripcion: ${regalo.descripcion} <br>  
+	Descripción: ${regalo.descripcion} <br>  
 	Precio: ${regalo.precio}<br>  
-	Tipo de Regalo:	
+	Tipo de regalo:	
 	<ul>  
 	<c:forEach var="regalo" items="${regalo.categoria}"> 
 	 

@@ -1,36 +1,25 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-/*import javax.persistence.Entity;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity*/
+@Entity
 public class CajaDeRegalo {
 	
-	/*@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)*/
-	private Integer numeroDeCaja;
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String nombre;
 	private String descripcion;
 	private Double precio;
-	/*private Categoria categoria;*/
-	private String[] categoria;
 	
-	
-	/*public CajaDeRegalo (String nombre, String descripcion, Double precio) {
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.precio = precio;
-	}*/
-	
-
-	public Integer getNumeroDeCaja() {
-		return numeroDeCaja;
+	public Long getId() {
+		return id;
 	}
-	public void setNumeroDeCaja(Integer numeroDeCaja) {
-		this.numeroDeCaja = numeroDeCaja;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getNombre() {
 		return nombre;
@@ -50,12 +39,7 @@ public class CajaDeRegalo {
 	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
-	public String[] getCategoria() {
-		return categoria;
-	}
-	public void setCategoria(String[] categoria) {
-		this.categoria = categoria;
-	}
+	
 	
 
 }

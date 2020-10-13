@@ -33,4 +33,8 @@ public class ServicioLoginImpl implements ServicioLogin {
 	public Boolean guardarUsuario(Usuario usuario) {
 		return servicioLoginDao.guardarUsuario(usuario);
 	}
+	@Override
+	public Boolean buscarUsuarioPorNombreUsuario(Usuario usuario) {
+		return servicioLoginDao.buscarUsuarioPorNombreUsuario(usuario);
+	}
 }

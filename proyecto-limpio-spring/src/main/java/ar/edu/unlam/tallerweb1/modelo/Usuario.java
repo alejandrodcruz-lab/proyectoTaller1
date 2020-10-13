@@ -1,37 +1,48 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
-// Clase que modela el concepto de Usuario, la anotacion @Entity le avisa a hibernate que esta clase es persistible
-// el paquete ar.edu.unlam.tallerweb1.modelo esta indicado en el archivo hibernateCOntext.xml para que hibernate
-// busque entities en él
 @Entity
 public class Usuario {
 
-	// La anotacion id indica que este atributo es el utilizado como clave primaria de la entity, se indica que el valor es autogenerado.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
-	// para el resto de los atributo no se usan anotaciones entonces se usa el default de hibernate: la columna se llama igual que
-	// el atributo, la misma admite nulos, y el tipo de dato se deduce del tipo de dato de java.
-	@Column(name = "email")
+	@Column(name="email",unique=true, nullable = false)
 	private String email;
-	@Column(name = "password")
+	@Column(name = "password", nullable = false)
 	private String password;
 	@Column(name = "rol")
 	private String rol;
-	@Column(name = "nombreUsuario")
+	@Column(name = "nombreUsuario",unique=true, nullable = false)
 	private String nombreUsuario;
-	@Column(name = "nombre")
+	@Column(name = "nombre", nullable = false)	
 	private String nombre;
-	@Column(name = "apellido")
-	private String apellido;
+	@Column(name = "apellido", nullable = false)	
+	private String apellido;	
+	@Column(name = "IP", nullable = false)
+	private String ip;	
+	@Column(name = "fechaRegistro")
+	private Date fechaRegistro;	
+	
+	public Date getFechaRegistro() {
+		return fechaRegistro;
+	}
+	public void setFechaRegistro(Date fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
 	public Long getId() {
 		return id;
 	}

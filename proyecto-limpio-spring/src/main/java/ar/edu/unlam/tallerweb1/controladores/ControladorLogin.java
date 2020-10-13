@@ -21,7 +21,7 @@ public class ControladorLogin {
 	// dicha clase debe estar anotada como @Service o @Repository y debe estar en un paquete de los indicados en
 	// applicationContext.xml
 	private ServicioLogin servicioLogin;
-
+	
 	@Autowired
 	public ControladorLogin(ServicioLogin servicioLogin){
 		this.servicioLogin = servicioLogin;
@@ -58,19 +58,21 @@ public class ControladorLogin {
 		}
 		return new ModelAndView("login", model);
 	}
+	
+	private Boolean buscarUsuarioPorEmail(Usuario usuario) {
+		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
+		if (usuarioBuscado != null) {
+			return true;
+		}
+		return false;
+	}
 
 	// Escucha la URL /home por GET, y redirige a una vista.
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome() {
 		return new ModelAndView("home");
 	}
-	@RequestMapping(path = "/registrarse", method = RequestMethod.GET)
-	public ModelAndView irARegistrarse() {
-		ModelMap modelo = new ModelMap();
-		Usuario usuario = new Usuario();
-		modelo.put("usuario", usuario);
-		return new ModelAndView("registrarse",modelo);
-	}
+
 
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
@@ -78,15 +80,35 @@ public class ControladorLogin {
 		return new ModelAndView("redirect:/home");
 	}
 	
+	@RequestMapping(path = "/registrarse", method = RequestMethod.GET)
+	public ModelAndView irARegistrarse() {
+		ModelMap modelo = new ModelMap();
+		Usuario usuario = new Usuario();
+		modelo.put("usuario", usuario);
+		return new ModelAndView("registrarse",modelo);
+	}
+	
 	@RequestMapping(path = "/validar-registro", method = RequestMethod.POST)
 	public ModelAndView validarRegistro(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
-		Boolean guardado = servicioLogin.guardarUsuario(usuario);
-		if (guardado == true) {
-			return new ModelAndView("redirect:/home");
-		} else {
-			model.put("error", "Usuario o campo vacio");
-			return new ModelAndView("registrarse", model);
+		Boolean encontrado=buscarUsuarioPorEmail(usuario);
+		Boolean usuarioExistente=servicioLogin.buscarUsuarioPorNombreUsuario(usuario);
+		
+		if(encontrado==true) {
+			model.put("error", "Ya existe un usuario con ese email");
+			return new ModelAndView("registrarse", model); 			
+		}else if(encontrado==false) {
+			if(usuarioExistente==false){
+				usuario.setIp(request.getRemoteAddr());		
+				if (servicioLogin.guardarUsuario(usuario)) return new ModelAndView("redirect:/home");
+				
+				model.put("error", "No se pudo guardar el registro");
+				return new ModelAndView("registrarse", model);
+			}else {
+				model.put("error", "El nombre de usuario ya se encuentra en uso");
+				return new ModelAndView("registrarse", model); 
+			}			
 		}
+		return null;
 	}
 }

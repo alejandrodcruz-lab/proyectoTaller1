@@ -44,6 +44,14 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		return user!=null ? true:false ;
 	}
 	
-	
-
+	@SuppressWarnings("deprecation")
+	@Override
+	public Boolean buscarUsuarioPorNombreUsuario(Usuario usuario) {
+		final Session session = sessionFactory.getCurrentSession();
+		Usuario userBuscado=(Usuario) session.createCriteria(Usuario.class)				
+				.add(Restrictions.eq("nombreUsuario", usuario.getNombreUsuario()))				
+				.uniqueResult();
+		System.out.println("BUSQUEDA DE NOMBRE USUARIO "+userBuscado);
+		return userBuscado!=null ? true:false ;
+	}	
 }

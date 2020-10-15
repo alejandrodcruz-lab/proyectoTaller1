@@ -51,7 +51,14 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		Usuario userBuscado=(Usuario) session.createCriteria(Usuario.class)				
 				.add(Restrictions.eq("nombreUsuario", usuario.getNombreUsuario()))				
 				.uniqueResult();
-		System.out.println("BUSQUEDA DE NOMBRE USUARIO "+userBuscado);
 		return userBuscado!=null ? true:false ;
 	}	
+	@SuppressWarnings("deprecation")
+	@Override
+	public Usuario buscarUsuarioPorEmail(Usuario usuario) {
+		final Session session = sessionFactory.getCurrentSession();
+		return (Usuario) session.createCriteria(Usuario.class)				
+				.add(Restrictions.eq("email", usuario.getEmail()))			
+				.uniqueResult();
+	}
 }

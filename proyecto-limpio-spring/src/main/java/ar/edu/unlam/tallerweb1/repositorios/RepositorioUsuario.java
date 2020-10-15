@@ -8,4 +8,5 @@ public interface RepositorioUsuario {
 	Usuario consultarUsuario (Usuario usuario);
 	Boolean guardarUsuario(Usuario usuario);
 	Boolean buscarUsuarioPorNombreUsuario(Usuario usuario);
+	Usuario buscarUsuarioPorEmail(Usuario usuario);
 }

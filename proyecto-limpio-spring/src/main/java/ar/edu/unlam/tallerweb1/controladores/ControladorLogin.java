@@ -60,7 +60,7 @@ public class ControladorLogin {
 	}
 	
 	private Boolean buscarUsuarioPorEmail(Usuario usuario) {
-		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
+		Usuario usuarioBuscado = servicioLogin.buscarUsuarioPorEmail(usuario);
 		if (usuarioBuscado != null) {
 			return true;
 		}
@@ -94,20 +94,21 @@ public class ControladorLogin {
 		Boolean encontrado=buscarUsuarioPorEmail(usuario);
 		Boolean usuarioExistente=servicioLogin.buscarUsuarioPorNombreUsuario(usuario);
 		
-		if(encontrado==true) {
+		if(encontrado) {
 			model.put("error", "Ya existe un usuario con ese email");
 			return new ModelAndView("registrarse", model); 			
-		}else if(encontrado==false) {
-			if(usuarioExistente==false){
+		}
+		if(usuarioExistente){
+			model.put("error", "El nombre de usuario ya se encuentra en uso");
+			return new ModelAndView("registrarse", model); 
+		}
+		
+		if(encontrado==false && usuarioExistente==false) {			
 				usuario.setIp(request.getRemoteAddr());		
 				if (servicioLogin.guardarUsuario(usuario)) return new ModelAndView("redirect:/home");
 				
 				model.put("error", "No se pudo guardar el registro");
-				return new ModelAndView("registrarse", model);
-			}else {
-				model.put("error", "El nombre de usuario ya se encuentra en uso");
-				return new ModelAndView("registrarse", model); 
-			}			
+				return new ModelAndView("registrarse", model);			
 		}
 		return null;
 	}

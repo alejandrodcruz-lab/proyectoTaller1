@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Restaurantes</title>
+<title>Spa</title>
 </head>
 <body>
-<h1>CATEGORÍA : Restaurantes</h1>
+<h1>CATEGORÍA: Spa</h1>
 </body>
 </html>

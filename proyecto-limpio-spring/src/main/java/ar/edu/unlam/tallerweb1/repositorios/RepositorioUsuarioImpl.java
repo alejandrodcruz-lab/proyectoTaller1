@@ -7,6 +7,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 // implelemtacion del repositorio de usuarios, la anotacion @Repository indica a Spring que esta clase es un componente que debe
@@ -35,6 +38,24 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 				.add(Restrictions.eq("email", usuario.getEmail()))
 				.add(Restrictions.eq("password", usuario.getPassword()))
 				.uniqueResult();
+	}
+
+	@Override
+	public List<Usuario> todos() {
+		
+		Usuario lola = new Usuario();
+		lola.setRol("admin");
+		lola.setEmail("lola@gmail.com");
+
+		Usuario lolo = new Usuario();
+		lolo.setRol("user");
+		lolo.setEmail("lolo@gmail.com");
+
+		List<Usuario> lista = new LinkedList<>();
+		lista.add(lola);
+		lista.add(lolo);
+			
+		return lista;
 	}
 
 }
